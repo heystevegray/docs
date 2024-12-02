@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable react/no-children-prop */
 import { Button } from '@/components/ui/button'
 import { Copy } from 'lucide-react'
 import Markdown from 'react-markdown'
@@ -42,13 +41,14 @@ const FileViewer = ({ file }: { file?: string }) => {
       </Button>
       <div className='bg-card'>
         <Markdown
-          children={markdown}
           components={{
             code(props) {
               const { children, className, ...rest } = props
               const match = /language-(\w+)/.exec(className || '')
               return match ? (
-                <SyntaxHighlighter {...rest} PreTag='div' children={String(children).replace(/\n$/, '')} language={match[1]} style={dark} wrapLongLines showLineNumbers />
+                <SyntaxHighlighter PreTag='div' language={match[1]} style={dark} wrapLongLines showLineNumbers>
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
               ) : (
                 <code {...rest} className={className}>
                   {children}
@@ -56,7 +56,9 @@ const FileViewer = ({ file }: { file?: string }) => {
               )
             },
           }}
-        />
+        >
+          {markdown}
+        </Markdown>
       </div>
     </div>
   )
