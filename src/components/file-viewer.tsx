@@ -35,7 +35,7 @@ const FileViewer = ({ file }: { file?: string }) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <Button onClick={handleCopy}>
+      <Button onClick={handleCopy} className='w-fit'>
         <Copy />
         Copy
       </Button>

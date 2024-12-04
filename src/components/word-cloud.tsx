@@ -1,3 +1,5 @@
+'use client'
+
 // import { useMeasuredSize } from 'https://framer.com/m/framer/useMeasuredSize.js'
 import { ControlType, addPropertyControls, motion } from 'framer'
 import { useEffect, useRef, useState } from 'react'
@@ -14,20 +16,13 @@ const randomBetween = (min: number, max: number) => {
 const getFrequency = () => randomBetween(30, 100)
 
 const words: WordFrequency[] = [
-  { word: 'moving', frequency: getFrequency() },
-  { word: 'retirement', frequency: getFrequency() },
-  { word: 'divorce', frequency: getFrequency() },
-  { word: 'remarriage', frequency: getFrequency() },
-  { word: 'career', frequency: getFrequency() },
-  { word: 'job', frequency: getFrequency() },
-  { word: 'student', frequency: getFrequency() },
-  { word: 'alone', frequency: getFrequency() },
-  { word: 'lost', frequency: getFrequency() },
-  { word: 'loss', frequency: getFrequency() },
-  { word: 'change', frequency: getFrequency() },
-  { word: 'challenge', frequency: getFrequency() },
-  { word: 'clutter', frequency: getFrequency() },
-  { word: 'mess', frequency: getFrequency() },
+  { word: 'sad', frequency: getFrequency() },
+  { word: 'happy', frequency: getFrequency() },
+  { word: 'angry', frequency: getFrequency() },
+  { word: 'scared', frequency: getFrequency() },
+  { word: 'disgusted', frequency: getFrequency() },
+  { word: 'surprised', frequency: getFrequency() },
+  { word: 'neutral', frequency: getFrequency() },
 ]
 
 interface WordCloudProps {
@@ -54,7 +49,7 @@ WordCloud.defaultProps = {
   minFontSize: 60,
   maxFontSize: 20,
   backgroundColor: 'transparent',
-  text: 'Relevant Clarity',
+  text: 'Hey',
   color: '#ffffff',
   speedInSeconds: 3,
   font: undefined,
@@ -69,7 +64,7 @@ WordCloud.defaultProps = {
 addPropertyControls(WordCloud, {
   text: {
     type: ControlType.String,
-    defaultValue: 'Relevant Clarity',
+    defaultValue: 'Hey',
     placeholder: 'Type something…',
   },
   color: {
@@ -133,7 +128,7 @@ addPropertyControls(WordCloud, {
  */
 export default function WordCloud(props: WordCloudProps) {
   const container = useRef<HTMLDivElement>(null)
-  const size = { width: 100, height: 100 } // useMeasuredSize(container)
+  const size = { width: 1000, height: 1000 } //useMeasuredSize(container)
   const width = size?.width ?? WordCloud.defaultProps.width
   const height = size?.height ?? WordCloud.defaultProps.height
 
@@ -148,8 +143,8 @@ export default function WordCloud(props: WordCloudProps) {
     overflow: 'hidden',
     backgroundColor: props.backgroundColor,
     position: 'relative',
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    // height: '100%',
     borderRadius: props.radius,
     transition: 'opacity 0.3s ease-in-out',
     ...(!!props?.border && props?.border),
