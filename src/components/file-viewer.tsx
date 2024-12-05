@@ -6,6 +6,7 @@ import Markdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark as dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { toast } from 'sonner'
+import Container from './container'
 
 const FileViewer = ({ file }: { file?: string }) => {
   const markdown = `
@@ -34,23 +35,37 @@ const FileViewer = ({ file }: { file?: string }) => {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-2 items-center'>
       <Button onClick={handleCopy} className='w-fit'>
         <Copy />
-        Copy
+        Copy Code
       </Button>
-      <div className='bg-card'>
+      <Container className='border p-4 rounded-md max-w-lg'>
         <Markdown
           components={{
             code(props) {
               const { children, className, ...rest } = props
               const match = /language-(\w+)/.exec(className || '')
               return match ? (
-                <SyntaxHighlighter PreTag='div' language={match[1]} style={dark} wrapLongLines showLineNumbers>
+                <SyntaxHighlighter
+                  PreTag='div'
+                  language={match[1]}
+                  style={dark}
+                  customStyle={{
+                    backgroundColor: 'transparent',
+                    // backgroundColor: 'red',
+                  }}
+                >
                   {String(children).replace(/\n$/, '')}
                 </SyntaxHighlighter>
               ) : (
-                <code {...rest} className={className}>
+                <code
+                  {...rest}
+                  className={className}
+                  style={{
+                    backgroundColor: 'transparent',
+                  }}
+                >
                   {children}
                 </code>
               )
@@ -59,7 +74,8 @@ const FileViewer = ({ file }: { file?: string }) => {
         >
           {markdown}
         </Markdown>
-      </div>
+        {/* <p className='break-all whitespace-break-spaces'>{file}</p> */}
+      </Container>
     </div>
   )
 }

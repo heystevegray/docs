@@ -8,6 +8,8 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react'
 import { siteConfig } from '@/lib/config'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import { AppSidebar } from '@/components/app-sidebar'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -41,14 +43,17 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <div className='relative flex min-h-screen w-full flex-col'>
-            <Header />
-            <main className='flex-1'>{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-          <Analytics />
-          <TailwindIndicator />
+          <SidebarProvider>
+            <AppSidebar />
+            <div className='relative flex min-h-screen w-full flex-col'>
+              <Header />
+              <main className='flex-1'>{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+            <Analytics />
+            <TailwindIndicator />
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
