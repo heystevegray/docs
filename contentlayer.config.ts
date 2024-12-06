@@ -3,6 +3,8 @@ import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 import rehypePrettyCode, { Options } from 'rehype-pretty-code'
 import { codeImport } from 'remark-code-import'
 import rehypeHighlightLines, { HighlightLinesOptions } from 'rehype-highlight-code-lines'
+import { visit } from 'unist-util-visit'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export const Doc = defineDocumentType(() => ({
   name: 'Doc',
@@ -29,7 +31,6 @@ export const Doc = defineDocumentType(() => ({
 const prettyCodeOptions: Options = {
   theme: 'github-dark',
   defaultLang: 'tsx',
-  keepBackground: false,
 }
 
 const highlightLinesOptions: HighlightLinesOptions = {
@@ -44,6 +45,31 @@ export default makeSource({
     rehypePlugins: [
       [rehypePrettyCode, prettyCodeOptions],
       [rehypeHighlightLines, highlightLinesOptions],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
+          },
+        },
+      ],
+      () => (tree) => {
+        visit(tree, (node) => {
+          console.log({ node })
+          if (node?.type === 'element' && node?.tagName === 'pre') {
+            const [codeEl] = node.children
+            console.log({ codeEl })
+
+            if (codeEl.tagName !== 'code') {
+              return
+            }
+
+            node.__rawString__ = codeEl.children?.[0].value
+            console.log({ __rawString__: codeEl.children?.[0].value })
+          }
+        })
+      },
     ],
   },
 })

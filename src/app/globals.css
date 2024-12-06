@@ -24,7 +24,7 @@ body {
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 5.9% 90%;
+    --border: 240 4.8% 95.9%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
@@ -60,7 +60,7 @@ body {
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 100%;
+    --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
     --chart-1: 220 70% 50%;
@@ -94,7 +94,6 @@ body {
 
 pre,
 pre code {
-  background-color: hsl(var(--color-code-background));
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -107,7 +106,6 @@ pre code {
 
 pre {
   padding: 0.5rem 1rem;
-  border: 1px solid hsl(var(--color-text-weak));
   border-radius: 5px;
 
   overflow-x: auto;

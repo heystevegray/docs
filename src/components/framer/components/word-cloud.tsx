@@ -16,13 +16,16 @@ const randomBetween = (min: number, max: number) => {
 const getFrequency = () => randomBetween(30, 100)
 
 const words: WordFrequency[] = [
-  { word: 'sad', frequency: getFrequency() },
-  { word: 'happy', frequency: getFrequency() },
-  { word: 'angry', frequency: getFrequency() },
-  { word: 'scared', frequency: getFrequency() },
-  { word: 'disgusted', frequency: getFrequency() },
-  { word: 'surprised', frequency: getFrequency() },
-  { word: 'neutral', frequency: getFrequency() },
+  { word: 'word 1', frequency: getFrequency() },
+  { word: 'word 2', frequency: getFrequency() },
+  { word: 'word 3', frequency: getFrequency() },
+  { word: 'word 4', frequency: getFrequency() },
+  { word: 'word 5', frequency: getFrequency() },
+  { word: 'word 6', frequency: getFrequency() },
+  { word: 'word 7', frequency: getFrequency() },
+  { word: 'word 8', frequency: getFrequency() },
+  { word: 'word 9', frequency: getFrequency() },
+  { word: 'word 10', frequency: getFrequency() },
 ]
 
 interface WordCloudProps {
@@ -49,7 +52,7 @@ WordCloud.defaultProps = {
   minFontSize: 60,
   maxFontSize: 20,
   backgroundColor: 'transparent',
-  text: 'Hey',
+  text: 'Words',
   color: '#ffffff',
   speedInSeconds: 3,
   font: undefined,
@@ -126,9 +129,11 @@ addPropertyControls(WordCloud, {
  * @framerSupportedLayoutWidth any
  * @framerSupportedLayoutHeight any
  */
+
+const pageSize = { width: 500, height: 500 }
 export default function WordCloud(props: WordCloudProps) {
   const container = useRef<HTMLDivElement>(null)
-  const size = { width: 1000, height: 1000 } //useMeasuredSize(container)
+  const size = pageSize
   const width = size?.width ?? WordCloud.defaultProps.width
   const height = size?.height ?? WordCloud.defaultProps.height
 
@@ -143,8 +148,8 @@ export default function WordCloud(props: WordCloudProps) {
     overflow: 'hidden',
     backgroundColor: props.backgroundColor,
     position: 'relative',
-    // width: '100%',
-    // height: '100%',
+    width: '100%',
+    height: pageSize.height,
     borderRadius: props.radius,
     transition: 'opacity 0.3s ease-in-out',
     ...(!!props?.border && props?.border),
