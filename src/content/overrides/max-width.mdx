@@ -1,0 +1,63 @@
+---
+title: Max Width
+description: This override sets a maximum width for a component based on the current breakpoint.
+kind: 'override'
+---
+
+```tsx
+// Learn more: https://www.framer.com/developers/overrides/
+import { ComponentType, useEffect, useState } from 'react'
+
+// Toggle this between true or false to show and hide the background colors for each breakpoint.
+const DEBUG: boolean = false
+
+export function withMaxWidth(Component): ComponentType {
+  return (props) => {
+    let maxWidth: string | number = 1000
+    let background = 'red'
+
+    const [isTablet, setIsTablet] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    if (isTablet) {
+      maxWidth = 600
+      background = 'green'
+    }
+
+    if (isMobile) {
+      maxWidth = '95%'
+      background = 'blue'
+    }
+
+    useEffect(() => {
+      const tabletQuery = window.matchMedia('(max-width: 1199px)')
+      const mobileQuery = window.matchMedia('(max-width: 809px)')
+
+      const updateTablet = () => setIsTablet(tabletQuery.matches)
+      const updateMobile = () => setIsMobile(mobileQuery.matches)
+
+      // Set the initial state, need to call to initialize mobile.
+      updateTablet()
+      updateMobile()
+
+      tabletQuery.addEventListener('change', updateTablet)
+      mobileQuery.addEventListener('change', updateMobile)
+
+      return () => {
+        tabletQuery.removeEventListener('change', updateTablet)
+        mobileQuery.removeEventListener('change', updateMobile)
+      }
+    }, [])
+
+    return (
+      <Component
+        {...props}
+        style={{
+          maxWidth,
+          background: DEBUG ? background : undefined,
+        }}
+      />
+    )
+  }
+}
+```

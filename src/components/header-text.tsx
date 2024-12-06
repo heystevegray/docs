@@ -18,7 +18,7 @@ export type EmptyScreenProps = {
 
 const HeaderText = ({ title, description, icon, children = null, hideIcon = false, badge = '', className }: EmptyScreenProps) => {
   return (
-    <div className='pt-12'>
+    <div className='py-6'>
       <Container className={cn('flex w-full items-center justify-center', className)}>
         <div className='flex flex-col space-y-4 text-center items-center justify-center'>
           <div

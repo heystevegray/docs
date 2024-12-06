@@ -1,4 +1,11 @@
-// import { useMeasuredSize } from 'https://framer.com/m/framer/useMeasuredSize.js'
+---
+title: Word Cloud
+description: A word cloud is a visual representation of text data. It displays a list of words, the importance of each being shown with font size or color.
+kind: 'component'
+---
+
+```tsx
+import { useMeasuredSize } from 'https://framer.com/m/framer/useMeasuredSize.js'
 import { ControlType, addPropertyControls, motion } from 'framer'
 import { useEffect, useRef, useState } from 'react'
 
@@ -86,14 +93,14 @@ addPropertyControls(WordCloud, {
     type: ControlType.String,
     defaultValue: WordCloud.defaultProps.font,
   },
-  // border: {
-  //   type: ControlType.Border,
-  //   defaultValue: {
-  //     borderWidth: 2,
-  //     borderStyle: 'solid', // solid, dashed, dotted or double
-  //     borderColor: 'rgba(250, 250, 250, 1)',
-  //   },
-  // },
+  border: {
+    type: ControlType.Border,
+    defaultValue: {
+      borderWidth: 2,
+      borderStyle: 'solid', // solid, dashed, dotted or double
+      borderColor: 'rgba(250, 250, 250, 1)',
+    },
+  },
   speedInSeconds: {
     type: ControlType.Number,
     defaultValue: 3,
@@ -133,7 +140,7 @@ addPropertyControls(WordCloud, {
  */
 export default function WordCloud(props: WordCloudProps) {
   const container = useRef<HTMLDivElement>(null)
-  const size = { width: 100, height: 100 } // useMeasuredSize(container)
+  const size = useMeasuredSize(container)
   const width = size?.width ?? WordCloud.defaultProps.width
   const height = size?.height ?? WordCloud.defaultProps.height
 
@@ -228,3 +235,4 @@ export default function WordCloud(props: WordCloudProps) {
     </motion.div>
   )
 }
+```
