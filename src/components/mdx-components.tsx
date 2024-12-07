@@ -10,6 +10,7 @@ import { MaxWidth } from './framer/overrides/max-width'
 import { CopyButton } from './copy-button'
 import Footer from './footer'
 import HeaderText from './header-text'
+import Container from './container'
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
@@ -52,6 +53,7 @@ const components = {
   MaxWidth,
   Footer,
   HeaderText,
+  Container,
 }
 
 interface MdxProps {

@@ -79,6 +79,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          href: '/react/container',
+          title: 'Container',
+          items: [],
+        },
+        {
           href: '/react/footer',
           title: 'Footer',
           items: [],
