@@ -5,7 +5,7 @@ interface CopyrightProps {
   size: number
 }
 
-export default function Copyright({ text = 'My LLC', color = '#ffffff', font = '', size = 16 }: CopyrightProps) {
+export default function Copyright({ text = 'My LLC', color = 'text-foreground', font = '', size = 16 }: CopyrightProps) {
   return (
     <p
       style={{

@@ -60,7 +60,6 @@ const addSourceCodeToNodeTreeSoICanAccessItInTheCopyButtonInMDX = () => {
     visit(tree, 'element', (node: Element) => {
       if (node.tagName === 'pre' && node.children && node.children[0].type === 'element' && node.children[0].tagName === 'code') {
         const rawString = extractText(node.children[0].children)
-        console.log({ rawString })
         node.properties.sourceCodeText = rawString
       }
     })

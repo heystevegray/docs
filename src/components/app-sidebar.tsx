@@ -1,13 +1,5 @@
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
-import { ComponentProps, components } from '@/lib/components'
-
-const ComponentLink = (component: ComponentProps) => {
-  return (
-    <a href={`/docs/${component.href}`}>
-      <span>{component.name}</span>
-    </a>
-  )
-}
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenuButton } from '@/components/ui/sidebar'
+import { docsConfig } from '@/lib/config/docs'
 
 export function AppSidebar() {
   return (
@@ -15,38 +7,18 @@ export function AppSidebar() {
       <SidebarHeader />
       <Sidebar>
         <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Components</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {components
-                  .filter((component) => component.type === 'component')
-                  .map((component) => (
-                    <SidebarMenuItem key={component.href}>
-                      <SidebarMenuButton asChild>
-                        <ComponentLink {...component} />
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-          <SidebarGroup>
-            <SidebarGroupLabel>Overrides</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {components
-                  .filter((component) => component.type === 'override')
-                  .map((component) => (
-                    <SidebarMenuItem key={component.href}>
-                      <SidebarMenuButton asChild>
-                        <ComponentLink {...component} />
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+          {docsConfig.sidebarNav.map((group) => (
+            <SidebarGroup key={group.title}>
+              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+              {group.items.map((navItem) => (
+                <SidebarMenuButton asChild key={navItem.href}>
+                  <a href={navItem.href}>
+                    <span>{navItem.title}</span>
+                  </a>
+                </SidebarMenuButton>
+              ))}
+            </SidebarGroup>
+          ))}
         </SidebarContent>
       </Sidebar>
       <SidebarFooter />

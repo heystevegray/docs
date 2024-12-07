@@ -5,6 +5,8 @@ import HeaderText from '@/components/header-text'
 import { capitalizeFirstLetter } from '@/lib/utils'
 import { allDocs } from 'contentlayer/generated'
 import { Mdx } from '@/components/mdx-components'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface DocPageProps {
   params: {
@@ -17,7 +19,15 @@ const DocPage = ({ params }: DocPageProps) => {
   const doc = allDocs.find((doc) => doc.slugAsParams === slug)
 
   if (!doc) {
-    return <HeaderText title='Sad face' description='This document could not be found.' />
+    return (
+      <Container>
+        <HeaderText title='Sad face' description='This document could not be found.'>
+          <Link href='/'>
+            <Button>Go Home</Button>
+          </Link>
+        </HeaderText>
+      </Container>
+    )
   }
 
   return (

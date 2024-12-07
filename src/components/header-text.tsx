@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
-import { ClassName } from '@/lib/types'
+import { ClassName } from '@/lib/types/types'
 import { cn } from '@/lib/utils'
 
 import Container from './container'
@@ -22,7 +22,7 @@ const HeaderText = ({ title, description, icon, children = null, hideIcon = fals
     <div className='py-6'>
       <Container
         className={cn(
-          'flex w-full items-center justify-center',
+          'flex w-full items-center justify-center p-0 md:p-0',
           {
             'justify-start items-start': left,
           },
@@ -39,7 +39,7 @@ const HeaderText = ({ title, description, icon, children = null, hideIcon = fals
               hidden: hideIcon,
             })}
           >
-            {icon ?? <Icons.logo className='size-8' />}
+            {icon ?? <Icons.logo className='size-8 text-background' />}
           </div>
           <Badge
             className={cn('mx-auto w-fit', {
@@ -49,7 +49,7 @@ const HeaderText = ({ title, description, icon, children = null, hideIcon = fals
           >
             {badge}
           </Badge>
-          <h2 className='m-0 p-0 text-2xl md:text-3xl'>{title ?? null}</h2>
+          <h1 className='m-0 p-0 text-2xl md:text-3xl'>{title ?? null}</h1>
           {description ? <p className='text-lg leading-normal text-muted-foreground'>{description}</p> : null}
           {children}
         </div>

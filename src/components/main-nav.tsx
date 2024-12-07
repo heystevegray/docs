@@ -1,11 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { siteConfig } from '@/lib/config'
+import { siteConfig } from '@/lib/config/site'
 import { cn } from '@/lib/utils'
 
-import { NavItem } from '@/lib/types'
-import { Icons } from './icons'
+import { NavItem } from '@/lib/types/types'
 
 interface MainNavProps {
   items?: NavItem[]
@@ -26,10 +25,7 @@ export function MainNav({ items }: MainNavProps) {
             (item, index) =>
               item.href && (
                 <Link key={index} href={item.href} className={cn('flex items-center gap-2 text-sm font-medium text-muted-foreground', item.disabled && 'cursor-not-allowed opacity-80')}>
-                  <div className={cn('flex items-center gap-2')}>
-                    <item.icon className='size-4' />
-                    {item.title}
-                  </div>
+                  <div className={cn('flex items-center gap-2')}>{item.title}</div>
                 </Link>
               )
           )}
