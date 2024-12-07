@@ -1,3 +1,28 @@
+---
+title: Header Text
+description: A page header that has a title, description, logo.
+kind: 'snippet'
+---
+
+## Demo
+
+### Default Variant
+
+It's centered by default.
+
+<HeaderText title='Code snippets for you' description='Not at all inspired by shadcn/ui.' />
+
+---
+
+### Left Variant
+
+<HeaderText title='Code snippets for you' description='Not at all inspired by shadcn/ui.' variant='left' />
+
+---
+
+## Source Code
+
+```tsx
 import { PropsWithChildren, ReactNode } from 'react'
 
 import { ClassName } from '@/lib/types/types'
@@ -59,3 +84,4 @@ const HeaderText = ({ title, description, icon, children = null, hideIcon = fals
 }
 
 export default HeaderText
+```
