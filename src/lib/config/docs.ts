@@ -11,7 +11,7 @@ export const docsConfig: DocsConfig = {
       href: '/framer',
       items: [
         {
-          title: 'Components',
+          title: 'Framer Components',
           href: '/fraemr/components',
           items: [
             {
@@ -29,7 +29,7 @@ export const docsConfig: DocsConfig = {
           ],
         },
         {
-          title: 'Overrides',
+          title: 'Framer Overrides',
           href: '/fraemr/overrides',
           items: [
             {
