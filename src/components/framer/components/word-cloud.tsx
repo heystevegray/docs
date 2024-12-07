@@ -53,13 +53,13 @@ WordCloud.defaultProps = {
   maxFontSize: 20,
   backgroundColor: 'transparent',
   text: 'Words',
-  color: '#ffffff',
+  color: 'hsl(var(--foreground))',
   speedInSeconds: 3,
   font: undefined,
   border: {
     borderWidth: 2,
     borderStyle: 'solid', // solid, dashed, dotted or double
-    borderColor: 'rgba(255, 255, 255, 1)',
+    borderColor: 'hsl(var(--foreground))',
   },
   radius: 0,
 }
@@ -72,12 +72,12 @@ addPropertyControls(WordCloud, {
   },
   color: {
     type: ControlType.Color,
-    defaultValue: '#fff',
+    defaultValue: 'hsl(var(--foreground))',
     optional: true,
   },
   backgroundColor: {
     type: ControlType.Color,
-    defaultValue: '#000',
+    defaultValue: 'hsl(var(--background))',
     optional: true,
   },
   font: {

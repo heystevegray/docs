@@ -7,26 +7,53 @@ export interface DocsConfig {
 export const docsConfig: DocsConfig = {
   sidebarNav: [
     {
-      title: 'Components',
+      title: 'Framer',
+      href: '/framer',
       items: [
         {
-          href: '/copyright',
-          title: 'Copyright',
-          items: [],
+          title: 'Components',
+          href: '/fraemr/components',
+          items: [
+            {
+              href: '/framer/components/copyright',
+              title: 'Copyright',
+              items: [],
+              label: 'New',
+            },
+            {
+              href: '/framer/components/word-cloud',
+              title: 'Word Cloud',
+              items: [],
+              label: 'New',
+            },
+          ],
         },
         {
-          href: '/word-cloud',
-          title: 'Word Cloud',
-          items: [],
+          title: 'Overrides',
+          href: '/fraemr/overrides',
+          items: [
+            {
+              href: '/framer/overrides/max-width',
+              title: 'Max Width',
+              items: [],
+              label: 'New',
+            },
+          ],
         },
       ],
     },
     {
-      title: 'Overrides',
+      title: 'VS Code',
+      href: '/vs-code',
       items: [
         {
-          href: '/max-width',
-          title: 'Max Width',
+          href: '/vs-code/dark-theme',
+          title: 'Dark Theme',
+          items: [],
+        },
+        {
+          href: '/vs-code/window-title',
+          title: 'Window Title',
           items: [],
         },
       ],

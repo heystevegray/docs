@@ -49,7 +49,7 @@ export function MaxWidth() {
           background,
         }}
       >
-        <p className='text-xl'>{size}</p>
+        <p className='text-xl text-white'>{size}</p>
       </div>
     </div>
   )

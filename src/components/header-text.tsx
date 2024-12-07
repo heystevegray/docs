@@ -35,11 +35,11 @@ const HeaderText = ({ title, description, icon, children = null, hideIcon = fals
           })}
         >
           <div
-            className={cn('flex justify-center items-center fill-background bg-foreground rounded-full w-fit p-4', {
+            className={cn('flex justify-center items-center text-background fill-background bg-foreground rounded-full w-fit p-4', {
               hidden: hideIcon,
             })}
           >
-            {icon ?? <Icons.logo className='size-8 text-background' />}
+            {icon ?? <Icons.logo className='size-8' />}
           </div>
           <Badge
             className={cn('mx-auto w-fit', {

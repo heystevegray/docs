@@ -16,12 +16,12 @@ export const Doc = defineDocumentType(() => ({
     description: { type: 'string', required: true },
     kind: {
       type: 'enum',
-      options: ['component', 'override'],
+      options: ['component', 'override', 'snippet'],
       required: true,
     },
   },
   computedFields: {
-    slug: { type: 'string', resolve: (docs) => `/docs/${docs._raw.flattenedPath}` },
+    slug: { type: 'string', resolve: (docs) => `/${docs._raw.flattenedPath}` },
     slugAsParams: {
       type: 'string',
       resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
