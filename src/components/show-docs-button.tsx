@@ -5,14 +5,14 @@ import { Button } from './ui/button'
 import { useSidebar } from './ui/sidebar'
 
 const ShowDocsButton = () => {
-  const { setOpen, setOpenMobile, isMobile } = useSidebar()
+  const { open, setOpen, setOpenMobile, isMobile } = useSidebar()
   return (
     <Button
       onClick={() => {
         if (isMobile) {
-          setOpenMobile(true)
+          setOpenMobile(!open)
         } else {
-          setOpen(true)
+          setOpen(!open)
         }
       }}
     >
