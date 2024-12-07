@@ -35,13 +35,11 @@ const components = {
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => <tr className={cn('last:border-b-none m-0 border-b', className)} {...props} />,
   th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => <th className={cn('px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right', className)} {...props} />,
   td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => <td className={cn('px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right', className)} {...props} />,
-  pre: ({ className, __rawString__, ...props }: React.HTMLAttributes<HTMLPreElement> & { __rawString__?: string }) => {
-    console.log({ __rawString__ })
-
+  pre: ({ className, sourceCodeText, ...props }: React.HTMLAttributes<HTMLPreElement> & { sourceCodeText?: string }) => {
     return (
       <div className='relative'>
         <pre className={cn('max-h-[650px] overflow-x-auto rounded-lg border py-4', className)} {...props} />
-        <CopyButton value={'hi'} className='absolute right-4 top-4' />
+        {sourceCodeText ? <CopyButton value={sourceCodeText} className='absolute right-4 top-4' /> : null}
       </div>
     )
   },

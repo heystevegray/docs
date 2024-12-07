@@ -4,7 +4,8 @@ import rehypePrettyCode, { Options } from 'rehype-pretty-code'
 import { codeImport } from 'remark-code-import'
 import rehypeHighlightLines, { HighlightLinesOptions } from 'rehype-highlight-code-lines'
 import { visit } from 'unist-util-visit'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import { Node } from 'unist'
+import { Element } from 'hast'
 
 export const Doc = defineDocumentType(() => ({
   name: 'Doc',
@@ -37,39 +38,40 @@ const highlightLinesOptions: HighlightLinesOptions = {
   showLineNumbers: true,
 }
 
+const isTextNode = (node: Node): node is Node & { value: string } => {
+  return node.type === 'text' && 'value' in node
+}
+
+const extractText = (nodes: Node[]): string => {
+  return nodes
+    .map((node) => {
+      if (isTextNode(node)) {
+        return node.value
+      } else if (node.type === 'element' && (node as Element).children) {
+        return extractText((node as Element).children)
+      }
+      return ''
+    })
+    .join('')
+}
+
+const addSourceCodeToNodeTreeSoICanAccessItInTheCopyButtonInMDX = () => {
+  return (tree: Node) => {
+    visit(tree, 'element', (node: Element) => {
+      if (node.tagName === 'pre' && node.children && node.children[0].type === 'element' && node.children[0].tagName === 'code') {
+        const rawString = extractText(node.children[0].children)
+        console.log({ rawString })
+        node.properties.sourceCodeText = rawString
+      }
+    })
+  }
+}
+
 export default makeSource({
   contentDirPath: './src/content',
   documentTypes: [Doc],
   mdx: {
     remarkPlugins: [remarkGfm, codeImport],
-    rehypePlugins: [
-      [rehypePrettyCode, prettyCodeOptions],
-      [rehypeHighlightLines, highlightLinesOptions],
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ['subheading-anchor'],
-            ariaLabel: 'Link to section',
-          },
-        },
-      ],
-      () => (tree) => {
-        visit(tree, (node) => {
-          console.log({ node })
-          if (node?.type === 'element' && node?.tagName === 'pre') {
-            const [codeEl] = node.children
-            console.log({ codeEl })
-
-            if (codeEl.tagName !== 'code') {
-              return
-            }
-
-            node.__rawString__ = codeEl.children?.[0].value
-            console.log({ __rawString__: codeEl.children?.[0].value })
-          }
-        })
-      },
-    ],
+    rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeHighlightLines, highlightLinesOptions], addSourceCodeToNodeTreeSoICanAccessItInTheCopyButtonInMDX],
   },
 })

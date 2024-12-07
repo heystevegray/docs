@@ -16,7 +16,7 @@ export function MainNav({ items }: MainNavProps) {
     <div className='flex gap-6'>
       <div className='flex flex-row items-center gap-2'>
         <Link href='/' className='flex items-center space-x-2'>
-          <Icons.logo className='size-4 fill-foreground' />
+          {/* <Icons.logo className='size-4' /> */}
           <span className='inline-block font-bold'>{siteConfig.name}</span>
         </Link>
       </div>
