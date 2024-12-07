@@ -1,15 +1,13 @@
 import Container from '@/components/container'
 import HeaderText from '@/components/header-text'
-import Link from 'next/link'
+import ShowDocsButton from '@/components/show-docs-button'
 
 export default function Home() {
   return (
     <Container>
-      <HeaderText title='Welcome To My Framer Library' />
-      <div className='flex gap-2 justify-center'>
-        <Link href='/components'>Components</Link>
-        <Link href='/overrides'>Overrides</Link>
-      </div>
+      <HeaderText title='Code snippets for you' description='Not at all inspired by shadcn/ui.'>
+        <ShowDocsButton />
+      </HeaderText>
     </Container>
   )
 }

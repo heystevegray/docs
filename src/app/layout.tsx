@@ -7,9 +7,10 @@ import { ThemeProvider } from 'next-themes'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react'
-import { siteConfig } from '@/lib/config'
+import { siteConfig } from '@/lib/config/site'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/app-sidebar'
+import { cookies } from 'next/headers'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,16 +35,18 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
 }
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true'
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <SidebarProvider>
+          <SidebarProvider defaultOpen={defaultOpen}>
             <AppSidebar />
             <div className='relative flex min-h-screen w-full flex-col'>
               <Header />

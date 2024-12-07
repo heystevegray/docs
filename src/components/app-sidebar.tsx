@@ -1,5 +1,5 @@
-import { components } from '@/app/components/[component]/page'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenuButton } from '@/components/ui/sidebar'
+import { docsConfig } from '@/lib/config/docs'
 
 export function AppSidebar() {
   return (
@@ -7,23 +7,18 @@ export function AppSidebar() {
       <SidebarHeader />
       <Sidebar>
         <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Components</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {Object.entries(components).map(([key, value]) => (
-                  <SidebarMenuItem key={key}>
-                    <SidebarMenuButton asChild>
-                      <a href={`/components/${key}`}>
-                        <value.icon />
-                        <span>{value.name}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+          {docsConfig.sidebarNav.map((group) => (
+            <SidebarGroup key={group.title}>
+              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+              {group.items.map((navItem) => (
+                <SidebarMenuButton asChild key={navItem.href}>
+                  <a href={navItem.href}>
+                    <span>{navItem.title}</span>
+                  </a>
+                </SidebarMenuButton>
+              ))}
+            </SidebarGroup>
+          ))}
         </SidebarContent>
       </Sidebar>
       <SidebarFooter />

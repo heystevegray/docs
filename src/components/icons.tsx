@@ -1,18 +1,13 @@
-import { ClassName } from '@/lib/types'
+import { ClassName } from '@/lib/types/types'
 import { cn } from '@/lib/utils'
-import { LucideIcon, LucideProps, Moon, SunMedium } from 'lucide-react'
+import { BookOpen, LucideIcon, LucideProps, Moon, SunMedium } from 'lucide-react'
 
 export type Icon = LucideIcon
 
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
-  logo: ({ className }: ClassName) => (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' className={cn('size-8', className)}>
-      <title>Framer</title>
-      <path d='M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z' />
-    </svg>
-  ),
+  logo: ({ className }: ClassName) => <BookOpen className={cn('size-6', className)} />,
   gitHub: (props: LucideProps) => (
     <svg viewBox='0 0 438.549 438.549' {...props}>
       <path
