@@ -16,7 +16,7 @@ export const Doc = defineDocumentType(() => ({
     description: { type: 'string', required: true },
     kind: {
       type: 'enum',
-      options: ['component', 'override', 'snippet'],
+      options: ['component', 'override', 'snippet', 'theme'],
       required: true,
     },
   },

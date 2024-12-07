@@ -56,5 +56,17 @@ export const docsConfig: DocsConfig = {
         },
       ],
     },
+    {
+      title: 'GitKraken',
+      href: '/gitkraken',
+
+      items: [
+        {
+          href: '/gitkraken/dark-theme',
+          title: 'Dark Theme',
+          items: [],
+        },
+      ],
+    },
   ],
 }
