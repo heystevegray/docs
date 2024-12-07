@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { type DialogProps } from '@radix-ui/react-dialog'
 
-import { cn } from '@/lib/utils'
+import { cn, flattenNavBarItems } from '@/lib/utils'
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from './ui/command'
 import { Button } from './ui/button'
 import { docsConfig } from '@/lib/config/docs'
@@ -55,7 +55,7 @@ export function CommandMenu({ ...props }: DialogProps) {
           <CommandEmpty>No results found.</CommandEmpty>
           {docsConfig.sidebarNav.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((navItem) => (
+              {flattenNavBarItems(group).map((navItem) => (
                 <CommandItem
                   key={navItem.href}
                   value={navItem.title}

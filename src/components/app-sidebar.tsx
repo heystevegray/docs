@@ -1,6 +1,7 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenuButton } from '@/components/ui/sidebar'
 import { docsConfig } from '@/lib/config/docs'
 import { Badge } from './ui/badge'
+import { flattenNavBarItems } from '@/lib/utils'
 
 export function AppSidebar() {
   return (
@@ -11,7 +12,7 @@ export function AppSidebar() {
           {docsConfig.sidebarNav.map((group) => (
             <SidebarGroup key={group.title}>
               <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
-              {group.items.map((navItem) => (
+              {flattenNavBarItems(group).map((navItem) => (
                 <SidebarMenuButton asChild key={navItem.href}>
                   <a href={navItem.href}>
                     {navItem.label && <Badge>{navItem.label}</Badge>}
