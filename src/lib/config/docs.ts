@@ -10,12 +10,12 @@ export const docsConfig: DocsConfig = {
       title: 'Components',
       items: [
         {
-          href: '/docs/copyright',
+          href: '/copyright',
           title: 'Copyright',
           items: [],
         },
         {
-          href: '/docs/word-cloud',
+          href: '/word-cloud',
           title: 'Word Cloud',
           items: [],
         },
@@ -25,7 +25,7 @@ export const docsConfig: DocsConfig = {
       title: 'Overrides',
       items: [
         {
-          href: '/docs/max-width',
+          href: '/max-width',
           title: 'Max Width',
           items: [],
         },
