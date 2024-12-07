@@ -68,5 +68,17 @@ export const docsConfig: DocsConfig = {
         },
       ],
     },
+    {
+      title: 'React',
+      href: '/react',
+
+      items: [
+        {
+          href: '/react/footer',
+          title: 'Footer',
+          items: [],
+        },
+      ],
+    },
   ],
 }
