@@ -3,12 +3,12 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { type DialogProps } from '@radix-ui/react-dialog'
-import { Circle } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from './ui/command'
 import { Button } from './ui/button'
 import { docsConfig } from '@/lib/config/docs'
+import { Badge } from './ui/badge'
 
 export function CommandMenu({ ...props }: DialogProps) {
   const router = useRouter()
@@ -63,9 +63,7 @@ export function CommandMenu({ ...props }: DialogProps) {
                     runCommand(() => router.push(navItem.href as string))
                   }}
                 >
-                  <div className='mr-2 flex h-4 w-4 items-center justify-center'>
-                    <Circle className='h-3 w-3' />
-                  </div>
+                  {navItem.label && <Badge>{navItem.label}</Badge>}
                   {navItem.title}
                 </CommandItem>
               ))}
