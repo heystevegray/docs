@@ -6,6 +6,8 @@ import rehypeHighlightLines, { HighlightLinesOptions } from 'rehype-highlight-co
 import { visit } from 'unist-util-visit'
 import { Node } from 'unist'
 import { Element } from 'hast'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export const Doc = defineDocumentType(() => ({
   name: 'Doc',
@@ -71,6 +73,20 @@ export default makeSource({
   documentTypes: [Doc],
   mdx: {
     remarkPlugins: [remarkGfm, codeImport],
-    rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeHighlightLines, highlightLinesOptions], addSourceCodeToNodeTreeSoICanAccessItInTheCopyButtonInMDX],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
+          },
+        },
+      ],
+      [rehypePrettyCode, prettyCodeOptions],
+      [rehypeHighlightLines, highlightLinesOptions],
+      addSourceCodeToNodeTreeSoICanAccessItInTheCopyButtonInMDX,
+    ],
   },
 })

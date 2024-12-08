@@ -1,4 +1,4 @@
-export const MY_WEBSITE_URL = 'https://www.stevegray.io/'
+export const MY_WEBSITE_URL = 'https://www.stevegray.io'
 export const MY_NAME = 'Steve Gray'
 
 export type SiteConfig = typeof siteConfig
@@ -10,5 +10,5 @@ export const siteConfig = {
   links: {
     github: 'https://github.com/heystevegray/docs',
   },
-  appURL: 'https://docs.stevegray.io/',
+  appURL: 'https://docs.stevegray.io',
 }

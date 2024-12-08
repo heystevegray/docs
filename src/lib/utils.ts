@@ -12,6 +12,12 @@ export const capitalizeFirstLetter = (value: string) => {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
+export const isDevelopmentEnvironment = () => process?.env?.NODE_ENV === 'development'
+
+export function absoluteUrl(path: string) {
+  return isDevelopmentEnvironment() ? `http://localhost:3000${path}` : `${siteConfig.appURL}${path}`
+}
+
 export const flattenNavBarItems = (group: SidebarNavItem): SidebarNavItem[] => {
   return group.items.reduce((acc, item) => {
     const newItem: SidebarNavItem = { ...item, isParent: item.items && item.items.length > 0 }
