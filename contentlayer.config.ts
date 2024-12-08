@@ -11,7 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export const Doc = defineDocumentType(() => ({
   name: 'Doc',
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: '**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },

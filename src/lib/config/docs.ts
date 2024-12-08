@@ -92,6 +92,17 @@ export const docsConfig: DocsConfig = {
             },
           ],
         },
+        {
+          title: 'Utility',
+          href: '/react/utility',
+          items: [
+            {
+              href: '/react/utils',
+              title: 'Utils',
+              items: [],
+            },
+          ],
+        },
       ],
     },
   ],
