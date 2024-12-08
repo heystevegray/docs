@@ -52,11 +52,15 @@ const DocPage = async ({ params }: DocPageProps) => {
     return (
       <Container>
         <HeaderText title={subItem.title} variant='left'>
-          {items.map((item) => (
-            <Link key={item.href} href={item.href} className='underline dark:hover:text-green-400 hover:text-green-700'>
-              <span>{item.title}</span>
-            </Link>
-          ))}
+          <ol className='list-decimal list-inside text-lg'>
+            {items.map((item) => (
+              <li key={item.href} className='list-item'>
+                <Link href={item.href} className='underline dark:hover:text-green-400 hover:text-green-700'>
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ol>
         </HeaderText>
       </Container>
     )
