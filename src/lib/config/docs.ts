@@ -59,7 +59,6 @@ export const docsConfig: DocsConfig = {
     {
       title: 'GitKraken',
       href: '/gitkraken',
-
       items: [
         {
           href: '/gitkraken/dark-theme',
@@ -71,22 +70,27 @@ export const docsConfig: DocsConfig = {
     {
       title: 'React',
       href: '/react',
-
       items: [
         {
-          href: '/react/header-text',
-          title: 'Header Text',
-          items: [],
-        },
-        {
-          href: '/react/container',
-          title: 'Container',
-          items: [],
-        },
-        {
-          href: '/react/footer',
-          title: 'Footer',
-          items: [],
+          title: 'Components',
+          href: '/react/components',
+          items: [
+            {
+              href: '/react/header-text',
+              title: 'Header Text',
+              items: [],
+            },
+            {
+              href: '/react/container',
+              title: 'Container',
+              items: [],
+            },
+            {
+              href: '/react/footer',
+              title: 'Footer',
+              items: [],
+            },
+          ],
         },
       ],
     },

@@ -1,7 +1,7 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenuButton } from '@/components/ui/sidebar'
 import { docsConfig } from '@/lib/config/docs'
 import { Badge } from './ui/badge'
-import { flattenNavBarItems } from '@/lib/utils'
+import { cn, flattenNavBarItems } from '@/lib/utils'
 
 export function AppSidebar() {
   return (
@@ -14,7 +14,7 @@ export function AppSidebar() {
               <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
               {flattenNavBarItems(group).map((navItem) => (
                 <SidebarMenuButton asChild key={navItem.href}>
-                  <a href={navItem.href}>
+                  <a href={navItem.href} className={cn(!navItem.isParent && 'pl-4')}>
                     {navItem.label && <Badge>{navItem.label}</Badge>}
                     <span>{navItem.title}</span>
                   </a>

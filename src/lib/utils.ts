@@ -12,11 +12,12 @@ export const capitalizeFirstLetter = (value: string) => {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
-export const flattenNavBarItems = (group: SidebarNavItem) => {
+export const flattenNavBarItems = (group: SidebarNavItem): SidebarNavItem[] => {
   return group.items.reduce((acc, item) => {
-    acc.push(item)
-    if (item.items && item.items.length > 0) {
-      acc = acc.concat(flattenNavBarItems(item))
+    const newItem: SidebarNavItem = { ...item, isParent: item.items && item.items.length > 0 }
+    acc.push(newItem)
+    if (newItem.isParent) {
+      acc = acc.concat(flattenNavBarItems(newItem))
     }
     return acc
   }, [] as SidebarNavItem[])

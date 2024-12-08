@@ -5,6 +5,7 @@ export interface NavItem {
   href: string
   disabled?: boolean
   label?: string
+  isParent?: boolean
 }
 
 export interface NavItemWithChildren extends NavItem {
