@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { SidebarNavItem } from './types/types'
-import { APP_DESCRIPTION, APP_NAME, APP_URL, MY_WEBSITE_URL } from './config/site'
+import { MY_WEBSITE_URL, siteConfig } from './config/site'
 import { Metadata } from 'next'
 
 export function cn(...inputs: ClassValue[]) {
@@ -24,8 +24,8 @@ export const flattenNavBarItems = (group: SidebarNavItem): SidebarNavItem[] => {
 }
 
 export function constructMetadata({
-  title = APP_NAME,
-  description = APP_DESCRIPTION,
+  title = siteConfig.name,
+  description = siteConfig.description,
   image = '/logo.jpg',
   icons = '/favicon.ico',
   noIndex = false,
@@ -40,7 +40,7 @@ export function constructMetadata({
     title,
     description,
     openGraph: {
-      url: new URL(APP_URL),
+      url: new URL(siteConfig.appURL),
       title,
       description,
       images: [
@@ -57,7 +57,7 @@ export function constructMetadata({
       creator: MY_WEBSITE_URL,
     },
     icons,
-    metadataBase: new URL(APP_URL),
+    metadataBase: new URL(siteConfig.appURL),
     ...(noIndex && {
       robots: {
         index: false,
