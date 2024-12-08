@@ -30,7 +30,7 @@ export const Doc = defineDocumentType(() => ({
 }))
 
 const prettyCodeOptions: Options = {
-  theme: 'github-dark',
+  theme: 'github-dark-high-contrast',
   defaultLang: 'tsx',
 }
 
