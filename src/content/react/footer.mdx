@@ -11,13 +11,15 @@ kind: 'snippet'
 ## Usage
 
 1. I typically create a config file in `src/lib/config.ts` to store site settings like my name and website URL.
-   ```ts
+
+   ```ts title="src/lib/config.ts"
    export const MY_WEBSITE_URL = 'https://www.stevegray.io/'
    export const MY_NAME = 'Steve Gray'
    ```
+
 2. Then I can always just copy and paste this footer component into my project.
 
-   ```tsx
+   ```tsx title="src/components/footer.tsx"
    import Link from 'next/link'
 
    import { MY_NAME, MY_WEBSITE_URL } from '@/lib/config/site'

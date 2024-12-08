@@ -1,14 +1,13 @@
-'use client'
-
 import Container from '@/components/container'
 import HeaderText from '@/components/header-text'
-import { capitalizeFirstLetter } from '@/lib/utils'
+import { capitalizeFirstLetter, constructMetadata } from '@/lib/utils'
 import { allDocs } from 'contentlayer/generated'
 import { Mdx } from '@/components/mdx-components'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { HeartCrack } from 'lucide-react'
 import { docsConfig } from '@/lib/config/docs'
+import { Metadata } from 'next'
 
 interface DocPageProps {
   params: {
@@ -16,10 +15,35 @@ interface DocPageProps {
   }
 }
 
-const DocPage = ({ params }: DocPageProps) => {
+async function getDocFromParams({ params }: DocPageProps) {
   const slugParam = params.slug?.join('/') || ''
   const slug = `/${slugParam}`
   const doc = allDocs.find((doc) => doc.slug === slug)
+
+  if (!doc) {
+    return null
+  }
+
+  return { doc, slug }
+}
+
+export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
+  const docFromParams = await getDocFromParams({ params })
+
+  if (!docFromParams) {
+    return {}
+  }
+
+  return constructMetadata({
+    title: docFromParams.doc.title,
+    description: docFromParams.doc.description,
+  })
+}
+
+const DocPage = async ({ params }: DocPageProps) => {
+  const docFromParams = await getDocFromParams({ params })
+  const doc = docFromParams?.doc
+  const slug = docFromParams?.slug
 
   const category = docsConfig.sidebarNav.flatMap((group) => group.items).filter((item) => item.href === slug)
   const subItem = category[0]

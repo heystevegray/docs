@@ -23,7 +23,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={cn('leading-7 [&:not(:first-child)]:mt-6', className)} {...props} />,
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => <ul className={cn('my-6 ml-6 list-disc', className)} {...props} />,
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => <ol className={cn('my-6 ml-6 list-decimal', className)} {...props} />,
-  li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <li className={cn('mt-2', className)} {...props} />,
+  li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <li className={cn('my-1', className)} {...props} />,
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <blockquote className={cn('mt-6 border-l-2 pl-6 italic', className)} {...props} />,
   img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
@@ -38,10 +38,11 @@ const components = {
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => <tr className={cn('last:border-b-none m-0 border-b', className)} {...props} />,
   th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => <th className={cn('px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right', className)} {...props} />,
   td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => <td className={cn('px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right', className)} {...props} />,
+  figcaption: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <figcaption className={cn('text-sm mt-4 mb-2 text-muted-foreground', className)} {...props} />,
   pre: ({ className, sourceCodeText, ...props }: React.HTMLAttributes<HTMLPreElement> & { sourceCodeText?: string }) => {
     return (
       <div className='relative'>
-        <pre className={cn('max-h-[650px] overflow-x-auto rounded-lg border py-4', className)} {...props} />
+        <pre className={cn('max-h-[650px] mb-4 overflow-x-auto rounded-lg border py-4', className)} {...props} />
         {sourceCodeText ? <CopyButton value={sourceCodeText} className='absolute right-4 top-4' /> : null}
       </div>
     )

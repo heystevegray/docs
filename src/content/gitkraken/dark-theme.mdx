@@ -12,7 +12,7 @@ kind: 'theme'
 4. You should see a dropdown with the default themes. There should be a link to the themes directory below the dropdown menu.
 5. Create a new file named ending in `.jsonc`. For example (`MyCustomTheme.jsonc` or `Dark Knight.jsonc`) and paste in the content below.
 
-   ```json
+   ```json title="Users/{yourUserName}/.gitkraken/{yourThemeName}.jsonc"
    {
      "meta": {
        "name": "Dark Knight",
@@ -133,7 +133,7 @@ kind: 'theme'
 
 6. Change the name of the meta tag to the name of your theme. This is the name that will appear in the dropdown.
 
-   ```json
+   ```json title="Users/{yourUserName}/.gitkraken/{yourThemeName}.jsonc"
    "meta": {
      "name": "Dark Knight", // the name that will appear in the dropdown
      "scheme": "dark" // must be "light" or "dark"

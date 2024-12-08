@@ -1,6 +1,6 @@
 ---
 title: Word Cloud
-description: A word cloud is a visual representation of text data. It displays a list of words, the importance of each being shown with font size or color.
+description: A word cloud is a visual representation of text data. It displays a list of words each with a random font size. Then it displays the reveal text.
 kind: 'component'
 ---
 
@@ -27,20 +27,16 @@ const randomBetween = (min: number, max: number) => {
 const getFrequency = () => randomBetween(30, 100)
 
 const words: WordFrequency[] = [
-  { word: 'moving', frequency: getFrequency() },
-  { word: 'retirement', frequency: getFrequency() },
-  { word: 'divorce', frequency: getFrequency() },
-  { word: 'remarriage', frequency: getFrequency() },
-  { word: 'career', frequency: getFrequency() },
-  { word: 'job', frequency: getFrequency() },
-  { word: 'student', frequency: getFrequency() },
-  { word: 'alone', frequency: getFrequency() },
-  { word: 'lost', frequency: getFrequency() },
-  { word: 'loss', frequency: getFrequency() },
-  { word: 'change', frequency: getFrequency() },
-  { word: 'challenge', frequency: getFrequency() },
-  { word: 'clutter', frequency: getFrequency() },
-  { word: 'mess', frequency: getFrequency() },
+  { word: 'word 1', frequency: getFrequency() },
+  { word: 'word 2', frequency: getFrequency() },
+  { word: 'word 3', frequency: getFrequency() },
+  { word: 'word 4', frequency: getFrequency() },
+  { word: 'word 5', frequency: getFrequency() },
+  { word: 'word 6', frequency: getFrequency() },
+  { word: 'word 7', frequency: getFrequency() },
+  { word: 'word 8', frequency: getFrequency() },
+  { word: 'word 9', frequency: getFrequency() },
+  { word: 'word 10', frequency: getFrequency() },
 ]
 
 interface WordCloudProps {
@@ -67,14 +63,14 @@ WordCloud.defaultProps = {
   minFontSize: 60,
   maxFontSize: 20,
   backgroundColor: 'transparent',
-  text: 'Relevant Clarity',
-  color: '#ffffff',
+  text: 'Words',
+  color: 'hsl(var(--foreground))',
   speedInSeconds: 3,
   font: undefined,
   border: {
     borderWidth: 2,
     borderStyle: 'solid', // solid, dashed, dotted or double
-    borderColor: 'rgba(255, 255, 255, 1)',
+    borderColor: 'hsl(var(--foreground))',
   },
   radius: 0,
 }
@@ -82,17 +78,17 @@ WordCloud.defaultProps = {
 addPropertyControls(WordCloud, {
   text: {
     type: ControlType.String,
-    defaultValue: 'Relevant Clarity',
+    defaultValue: 'Hey',
     placeholder: 'Type something…',
   },
   color: {
     type: ControlType.Color,
-    defaultValue: '#fff',
+    defaultValue: 'hsl(var(--foreground))',
     optional: true,
   },
   backgroundColor: {
     type: ControlType.Color,
-    defaultValue: '#000',
+    defaultValue: 'hsl(var(--background))',
     optional: true,
   },
   font: {
@@ -146,7 +142,7 @@ addPropertyControls(WordCloud, {
  */
 export default function WordCloud(props: WordCloudProps) {
   const container = useRef<HTMLDivElement>(null)
-  const size = useMeasuredSize(container)
+  const size = useMeasuredSize()
   const width = size?.width ?? WordCloud.defaultProps.width
   const height = size?.height ?? WordCloud.defaultProps.height
 
@@ -201,13 +197,6 @@ export default function WordCloud(props: WordCloudProps) {
     return props.minFontSize + ((frequency - minFrequency) / (maxFrequency - minFrequency)) * (props.maxFontSize - props.minFontSize)
   }
 
-  const getColor = () => {
-    // frequency: number
-    // const intensity = frequency / maxFrequency
-    // const alpha = intensity.toFixed(2)
-    return props.color // Keeps the user-defined color
-  }
-
   const getRandomPosition = (fontSize: number) => {
     const maxTop = height - fontSize
     const maxLeft = width - fontSize * (words.length / 2)
@@ -229,8 +218,7 @@ export default function WordCloud(props: WordCloudProps) {
       <p style={titleStyle}>{props.text}</p>
       {words.map((word, index) => {
         const fontSize = getFontSize(word.frequency)
-        const color = getColor()
-        // const color = getColor(word.frequency)
+        const color = props.color // Keeps the user-defined color
         const { top, left } = getRandomPosition(fontSize)
         return (
           <span key={index} style={wordStyle(fontSize, color, messy ? 1 : 0, top, left)}>
