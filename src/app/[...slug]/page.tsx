@@ -21,17 +21,17 @@ async function getDocFromParams({ params }: DocPageProps) {
   const doc = allDocs.find((doc) => doc.slug === slug)
 
   if (!doc) {
-    return null
+    return { doc: null, slug, slugParam }
   }
 
-  return { doc, slug }
+  return { doc, slug, slugParam }
 }
 
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
   const docFromParams = await getDocFromParams({ params })
 
-  if (!docFromParams) {
-    return {}
+  if (!docFromParams?.doc) {
+    return constructMetadata()
   }
 
   return constructMetadata({
@@ -42,8 +42,7 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
 
 const DocPage = async ({ params }: DocPageProps) => {
   const docFromParams = await getDocFromParams({ params })
-  const doc = docFromParams?.doc
-  const slug = docFromParams?.slug
+  const { doc = null, slug } = docFromParams
 
   const category = docsConfig.sidebarNav.flatMap((group) => group.items).filter((item) => item.href === slug)
   const subItem = category[0]
@@ -52,7 +51,7 @@ const DocPage = async ({ params }: DocPageProps) => {
   if (!doc && items.length > 0) {
     return (
       <Container>
-        <HeaderText title={subItem.title}>
+        <HeaderText title={subItem.title} variant='left'>
           {items.map((item) => (
             <Link key={item.href} href={item.href} className='underline dark:hover:text-green-400 hover:text-green-700'>
               <span>{item.title}</span>
