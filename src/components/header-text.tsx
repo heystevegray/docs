@@ -1,58 +1,88 @@
-import { PropsWithChildren, ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
-import { ClassName } from '@/lib/types/types'
 import { cn } from '@/lib/utils'
 
-import Container from './container'
-import { Icons } from './icons'
+import Container from '@/components/container'
+import { type ClassName } from '@/lib/types'
 import { Badge } from './ui/badge'
+import { Icons } from './icons'
+
+export type BaseHeaderTextProps = {
+  title?: string
+  description?: ReactNode | string
+}
+
+export type HeaderTextVariant = { variant?: 'center' | 'left' | 'small' }
 
 export type HeaderTextProps = {
-  title?: string
-  description?: string
-  hideIcon?: boolean
-  badge?: string
+  showIcon?: boolean
   icon?: ReactNode
-  variant?: 'default' | 'left'
+  badge?: string
+  variant?: 'center' | 'left' | 'small'
 } & ClassName &
-  PropsWithChildren
+  PropsWithChildren &
+  BaseHeaderTextProps &
+  HeaderTextVariant
 
-const HeaderText = ({ title, description, icon, children = null, hideIcon = false, badge = '', variant = 'default', className }: HeaderTextProps) => {
+const HeaderText = ({ title, description, icon, children = null, showIcon = false, variant = 'left', badge = '', className }: HeaderTextProps) => {
+  const descriptionContent =
+    typeof description === 'string' ? (
+      <p
+        className={cn('text-base leading-normal text-muted-foreground', {
+          'text-xs': variant === 'small',
+        })}
+      >
+        {description}
+      </p>
+    ) : (
+      description
+    )
+
   return (
-    <div className='py-6'>
+    <div className='w-full'>
       <Container
         className={cn(
-          'flex w-full items-center justify-center p-0 md:p-0',
+          'flex w-full flex-col items-center justify-center space-y-4 p-0 md:p-0 text-foreground',
           {
             'justify-start items-start': variant === 'left',
+            'items-start': variant === 'left' || variant === 'small',
           },
           className
         )}
       >
-        <div
-          className={cn('flex flex-col space-y-4 items-center justify-center w-full', {
-            'items-start': variant === 'left',
+        <Badge
+          variant='outline'
+          className={cn('mx-auto w-fit', {
+            'mx-0': variant === 'left',
+            hidden: !badge,
           })}
         >
-          <div
-            className={cn('flex justify-center items-center text-background fill-background bg-foreground rounded-full w-fit p-4', {
-              hidden: hideIcon,
-            })}
-          >
-            {icon ?? <Icons.logo className='size-8' />}
-          </div>
-          <Badge
-            className={cn('mx-auto w-fit', {
-              'mx-0': variant === 'left',
-              hidden: !badge,
-            })}
-          >
-            {badge}
-          </Badge>
-          <h1 className='m-0 p-0 text-2xl md:text-3xl'>{title ?? null}</h1>
-          {description ? <p className='text-lg leading-normal text-muted-foreground'>{description}</p> : null}
-          {children}
+          {badge}
+        </Badge>
+        <div
+          className={cn('justify-center items-center text-background fill-background bg-foreground rounded-full w-fit p-2 hidden', {
+            flex: showIcon,
+          })}
+        >
+          {icon ?? <Icons.logo className='text-background' />}
         </div>
+        <div
+          className={cn('flex flex-col space-y-2', {
+            'text-center': variant === 'center',
+          })}
+        >
+          {title ? (
+            <h2
+              className={cn('text-2xl', {
+                'text-lg': variant === 'small',
+              })}
+            >
+              {title}
+            </h2>
+          ) : null}
+          {descriptionContent ? descriptionContent : null}
+        </div>
+        {children ? children : null}
       </Container>
     </div>
   )

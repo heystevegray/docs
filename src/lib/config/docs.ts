@@ -1,4 +1,4 @@
-import { SidebarNavItem } from '../types/types'
+import { SidebarNavItem } from '../types'
 
 export interface DocsConfig {
   sidebarNav: SidebarNavItem[]
@@ -99,6 +99,17 @@ export const docsConfig: DocsConfig = {
             {
               href: '/react/utils',
               title: 'Utils',
+              items: [],
+            },
+          ],
+        },
+        {
+          title: 'Types',
+          href: '/react/types',
+          items: [
+            {
+              href: '/react/class-name',
+              title: 'ClassName',
               items: [],
             },
           ],

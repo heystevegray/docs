@@ -1,0 +1,23 @@
+---
+title: ClassName Type
+description: A type definition for a className prop.
+kind: 'snippet'
+---
+
+## Source Code
+
+```tsx title="src/lib/types.ts"
+export type ClassName = { className?: string }
+```
+
+## Usage
+
+```tsx title="src/app/page.tsx"
+import { type ClassName } from '@/lib/types'
+
+const Demo = ({ className }: ClassName) => {
+  return <div className={className}>Demo</div>
+}
+
+export default Demo
+```

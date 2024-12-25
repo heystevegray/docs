@@ -1,4 +1,4 @@
-import { ClassName } from '@/lib/types/types'
+import { ClassName } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { BookOpen, LucideIcon, LucideProps, Moon, SunMedium } from 'lucide-react'
 

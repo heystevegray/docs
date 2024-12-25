@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { SidebarNavItem } from './types/types'
+import { SidebarNavItem } from './types'
 import { MY_WEBSITE_URL, siteConfig } from './config/site'
 import { Metadata } from 'next'
 

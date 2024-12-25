@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { siteConfig } from '@/lib/config/site'
 import { cn } from '@/lib/utils'
 
-import { NavItem } from '@/lib/types/types'
+import { NavItem } from '@/lib/types'
 
 interface MainNavProps {
   items?: NavItem[]

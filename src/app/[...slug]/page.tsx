@@ -80,8 +80,8 @@ const DocPage = async ({ params }: DocPageProps) => {
 
   return (
     <article>
-      <Container>
-        <HeaderText hideIcon title={doc.title} description={doc.description} badge={capitalizeFirstLetter(doc.kind)} variant='left' />
+      <Container maxWidth mt>
+        <HeaderText title={doc.title} description={doc.description} badge={capitalizeFirstLetter(doc.kind)} variant='left' />
         <Mdx code={doc.body.code} />
       </Container>
     </article>

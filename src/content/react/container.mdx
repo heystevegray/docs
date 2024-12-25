@@ -4,10 +4,20 @@ description: A wrapper component that has a max-width, padding, and and overrida
 kind: 'snippet'
 ---
 
+The Container component is a reusable layout wrapper in React. It allows for flexible styling and structure for content by leveraging class names and conditionally applying styles.
+
+Props
+
+- `children`: The content to be wrapped by the Container.
+- `className`: Additional CSS classes to apply to the container.
+- `mt`: If true, adds a top margin of `mt-32.`
+- `main`: If true, renders the container as a `<main />` element instead of a `<div />` and applies additional styling (`mb-24`).
+- `maxWidth`: If true, restricts the container’s maximum width to `max-w-3xl`.
+
 ## Demo
 
-<Container className='border text-center'>
-  <span>This text is contained and has a custom className with a border.</span>
+<Container className='border text-center' maxWidth>
+  <span>This text is contained and has a custom `className` with a border. It&apos;s also using the `maxWidth` prop</span>
 </Container>
 
 ## Usage
@@ -18,7 +28,7 @@ import HeaderText from '@/components/header-text'
 
 export default function Home() {
   return (
-    <Container>
+    <Container main mt maxWidth>
       <HeaderText title='Code snippets for you' description='Not at all inspired by shadcn/ui.' />
     </Container>
   )
@@ -28,12 +38,21 @@ export default function Home() {
 ## Source Code
 
 ```tsx title="src/components/container.tsx"
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Container = ({ children, className }: { className?: string } & PropsWithChildren) => {
-  return <div className={cn('mx-auto w-full p-2 md:p-4 max-w-3xl lg:max-w-6xl', className)}>{children}</div>
+const Container = ({ children, className, mt = false, main = false, maxWidth = false }: { className?: string; main?: boolean; mt?: boolean; maxWidth?: boolean } & PropsWithChildren) => {
+  const sharedClassName = cn('mx-auto w-full p-4 md:p-6 md:py-2 max-w-3xl lg:max-w-6xl space-y-12', {
+    'mt-32': mt,
+    'max-w-xl lg:max-w-xl': maxWidth,
+  })
+
+  if (main) {
+    return <main className={cn('mb-24', sharedClassName, className)}>{children}</main>
+  }
+
+  return <div className={cn(sharedClassName, className)}>{children}</div>
 }
 
 export default Container
