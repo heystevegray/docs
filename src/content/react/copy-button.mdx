@@ -1,0 +1,95 @@
+---
+title: Copy Button
+description: Copying text to your clipboard.
+kind: 'snippet'
+---
+
+## Credit
+
+Pulled from [shadcn-ui/ui repo](https://github.com/shadcn-ui/ui/blob/main/apps/www/components/copy-button.tsx).
+
+## Demo
+
+### Icon only
+
+<CopyButton />
+
+### With text
+
+<CopyButton>Custom Text</CopyButton>
+
+## Usage
+
+```tsx title="src/app/page.tsx"
+import { CopyButton } from '@/components/copy-button'
+
+const Page = () => {
+  return <CopyButton />
+}
+
+export default Page
+```
+
+## Source Code
+
+```tsx title="src/components/copy-button.tsx"
+'use client'
+
+import * as React from 'react'
+import { CheckIcon, ClipboardIcon } from 'lucide-react'
+
+import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
+import { Button, type ButtonProps } from '../ui/button'
+
+interface CopyButtonProps extends ButtonProps {
+  value: string
+}
+
+export async function copyToClipboard(value: string) {
+  navigator.clipboard.writeText(value)
+  toast.success('Copied to clipboard')
+}
+
+export function CopyButton({ value, className, children, ...props }: CopyButtonProps) {
+  const [hasCopied, setHasCopied] = React.useState(false)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setHasCopied(false)
+    }, 2000)
+  }, [hasCopied])
+
+  if (children) {
+    return (
+      <Button
+        variant='outline'
+        onClick={() => {
+          copyToClipboard(value)
+          setHasCopied(true)
+        }}
+        {...props}
+      >
+        {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
+        <span>{children}</span>
+      </Button>
+    )
+  }
+
+  return (
+    <Button
+      size='icon'
+      variant='outline'
+      className={cn('relative z-10 size-8 [&_svg]:size-4', className)}
+      onClick={() => {
+        copyToClipboard(value)
+        setHasCopied(true)
+      }}
+      {...props}
+    >
+      <span className='sr-only'>Copy</span>
+      {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
+    </Button>
+  )
+}
+```

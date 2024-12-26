@@ -50,8 +50,8 @@ const DocPage = async ({ params }: DocPageProps) => {
 
   if (!doc && items.length > 0) {
     return (
-      <Container>
-        <HeaderText title={subItem.title} variant='left'>
+      <Container mt main>
+        <HeaderText title={subItem.title} variant='left' showIcon>
           <ol className='list-decimal list-inside text-lg'>
             {items.map((item) => (
               <li key={item.href} className='list-item'>

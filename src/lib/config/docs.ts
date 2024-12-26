@@ -4,7 +4,7 @@ export interface DocsConfig {
   sidebarNav: SidebarNavItem[]
 }
 
-export const docsConfig: DocsConfig = {
+export const config: DocsConfig = {
   sidebarNav: [
     {
       title: 'Framer',
@@ -90,6 +90,11 @@ export const docsConfig: DocsConfig = {
               title: 'Footer',
               items: [],
             },
+            {
+              href: '/react/copy-button',
+              title: 'Copy Button',
+              items: [],
+            },
           ],
         },
         {
@@ -118,3 +123,22 @@ export const docsConfig: DocsConfig = {
     },
   ],
 }
+
+// Sort all keys alphabetically
+const sortDocsConfig = (config: DocsConfig): DocsConfig => {
+  const sortItems = (items: SidebarNavItem[]): SidebarNavItem[] => {
+    return items
+      .map((item) => ({
+        ...item,
+        items: item.items ? sortItems(item.items) : [],
+      }))
+      .sort((a, b) => a.title.localeCompare(b.title))
+  }
+
+  return {
+    ...config,
+    sidebarNav: sortItems(config.sidebarNav),
+  }
+}
+
+export const docsConfig = sortDocsConfig(config)

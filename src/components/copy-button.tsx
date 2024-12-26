@@ -25,7 +25,7 @@ export async function copyToClipboard(value: string, description?: string) {
   }
 }
 
-export function CopyButton({ value, className, copyButtonVariant = 'code', ...props }: CopyButtonProps) {
+export function CopyButton({ value, className, copyButtonVariant = 'code', children, ...props }: CopyButtonProps) {
   const path = usePathname()
   const router = useRouter()
   const [hasCopied, setHasCopied] = React.useState(false)
@@ -39,6 +39,22 @@ export function CopyButton({ value, className, copyButtonVariant = 'code', ...pr
       setHasCopied(false)
     }, 2000)
   }, [hasCopied])
+
+  if (children) {
+    return (
+      <Button
+        variant='outline'
+        onClick={() => {
+          copyToClipboard(value)
+          setHasCopied(true)
+        }}
+        {...props}
+      >
+        {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
+        <span>{children}</span>
+      </Button>
+    )
+  }
 
   if (isLink) {
     // Example: baseURl/path#headerID
