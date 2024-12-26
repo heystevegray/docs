@@ -4,8 +4,8 @@ import ShowDocsButton from '@/components/show-docs-button'
 
 export default function Home() {
   return (
-    <Container>
-      <HeaderText title='Code snippets for you' description='Not at all inspired by shadcn/ui.'>
+    <Container mt main>
+      <HeaderText showIcon variant='center' title='Code snippets for you' description='Not at all inspired by shadcn/ui.'>
         <ShowDocsButton />
       </HeaderText>
     </Container>

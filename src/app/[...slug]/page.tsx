@@ -68,8 +68,8 @@ const DocPage = async ({ params }: DocPageProps) => {
 
   if (!doc) {
     return (
-      <Container>
-        <HeaderText title='Sad face' description='This document could not be found.' icon={<HeartCrack />}>
+      <Container mt main>
+        <HeaderText showIcon variant='center' title='Sad face' description='This document could not be found.' icon={<HeartCrack />}>
           <Link href='/'>
             <Button>Go Home</Button>
           </Link>
