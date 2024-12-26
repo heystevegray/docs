@@ -14,7 +14,7 @@ export function AppSidebar() {
               <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
               {flattenNavBarItems(group).map((navItem) => (
                 <SidebarMenuButton asChild key={navItem.href}>
-                  <a href={navItem.href} className={cn(!navItem.isParent && 'pl-4')}>
+                  <a href={navItem.href} className={cn(!navItem.isParent && 'ml-4 border-l rounded-none mb-1')}>
                     {navItem.label && <Badge>{navItem.label}</Badge>}
                     <span>{navItem.title}</span>
                   </a>
