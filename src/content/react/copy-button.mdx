@@ -6,7 +6,7 @@ kind: 'snippet'
 
 ## Credit
 
-Pulled from [shadcn-ui/ui repo](https://github.com/shadcn-ui/ui/blob/main/apps/www/components/copy-button.tsx).
+Pulled from the [shadcn-ui/ui repo](https://github.com/shadcn-ui/ui/blob/main/apps/www/components/copy-button.tsx).
 
 ## Demo
 
@@ -20,11 +20,27 @@ Pulled from [shadcn-ui/ui repo](https://github.com/shadcn-ui/ui/blob/main/apps/w
 
 ## Usage
 
+### Icon only
+
 ```tsx title="src/app/page.tsx"
 import { CopyButton } from '@/components/copy-button'
 
 const Page = () => {
   return <CopyButton />
+}
+
+export default Page
+```
+
+<CopyButton />
+
+### With text
+
+```tsx title="src/app/page.tsx"
+import { CopyButton } from '@/components/copy-button'
+
+const Page = () => {
+  return <CopyButton>Custom Text</CopyButton>
 }
 
 export default Page
