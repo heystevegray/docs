@@ -95,6 +95,11 @@ export const config: DocsConfig = {
               title: 'Copy Button',
               items: [],
             },
+            {
+              href: '/react/header',
+              title: 'Header',
+              items: [],
+            },
           ],
         },
         {

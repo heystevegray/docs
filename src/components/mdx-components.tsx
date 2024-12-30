@@ -11,6 +11,7 @@ import { CopyButton } from './copy-button'
 import Footer from './footer'
 import HeaderText from './header-text'
 import Container from './container'
+import { HeaderBasic } from './header'
 
 const linkRightOfHeaderClassName = 'flex flex-row-reverse gap-2 items-center justify-end'
 
@@ -64,6 +65,7 @@ const components = {
   HeaderText,
   Container,
   CopyButton,
+  HeaderBasic,
 }
 
 interface MdxProps {

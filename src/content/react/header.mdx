@@ -1,0 +1,125 @@
+---
+title: Header with Theme Toggle
+description: A header component that includes a site title and theme toggle.
+kind: 'snippet'
+---
+
+## Demo
+
+<HeaderBasic />
+
+## Usage
+
+```tsx title="src/app/layout.tsx"
+import Header from '@/components/header'
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang='en'>
+      <body>
+        <Header />
+        <main>{children}</main>
+      </body>
+    </html>
+  )
+}
+```
+
+## Source Code
+
+1. Install `next-themes`
+
+   ```bash
+   npm install next-themes
+   ```
+
+2. See [adding dark mode to your next app](https://ui.shadcn.com/docs/dark-mode/next). Below are snippets from that guide.
+
+```tsx title="src/components/theme-provider.tsx"
+'use client'
+
+import * as React from 'react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+
+export function ThemeProvider({ children, ...props }: React.ComponentProps<typeof NextThemesProvider>) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+}
+```
+
+```tsx title="src/components/theme-toggle.tsx"
+'use client'
+
+import * as React from 'react'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { Button } from './ui/button'
+
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme()
+
+  return (
+    <Button variant='ghost' size='icon' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      <Sun className='h-6 w-[1.3rem] dark:hidden' />
+      <Moon className='hidden size-5 dark:block' />
+      <span className='sr-only'>Toggle theme</span>
+    </Button>
+  )
+}
+```
+
+Then I add these.
+
+```ts title="src/lib/config.ts"
+export type SiteConfig = typeof siteConfig
+
+export const siteConfig = {
+  name: 'Docs',
+  description: 'Docs for my code.',
+  appURL: 'https://docs.stevegray.io',
+}
+```
+
+```tsx title="src/components/header.tsx"
+import Link from 'next/link'
+
+import { siteConfig } from '@/lib/config'
+import { ThemeToggle } from './theme-toggle'
+
+const Header = () => (
+  <header className='sticky top-0 z-40 w-full border-b bg-background'>
+    <div className='flex h-16 items-center space-x-4 px-3 sm:justify-between sm:space-x-0'>
+      <div className='flex flex-row items-center gap-2'>
+        <Link href='/' className='flex items-center space-x-2'>
+          <span className='inline-block font-bold'>{siteConfig.name}</span>
+        </Link>
+      </div>
+      <div className='flex flex-1 items-center justify-end md:space-x-4'>
+        <nav className='flex items-center'>
+          <ThemeToggle />
+        </nav>
+      </div>
+    </div>
+  </header>
+)
+
+export default Header
+```
+
+```tsx title="src/app/layout.tsx"
+import Header from '@/components/header'
+
+import '@/styles/globals.css'
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang='en'>
+      <body>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+          <Header />
+          <main>{children}</main>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+```

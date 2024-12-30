@@ -9,6 +9,23 @@ import { MainNav } from './main-nav'
 import { SidebarTrigger } from './ui/sidebar'
 import { CommandMenu } from './command-menu'
 
+export const HeaderBasic = () => (
+  <header className='sticky top-0 z-40 w-full border-b bg-background'>
+    <div className='flex h-16 items-center space-x-4 px-3 sm:justify-between sm:space-x-0'>
+      <div className='flex flex-row items-center gap-2'>
+        <Link href='/' className='flex items-center space-x-2'>
+          <span className='inline-block font-bold'>{siteConfig.name}</span>
+        </Link>
+      </div>
+      <div className='flex flex-1 items-center justify-end md:space-x-4'>
+        <nav className='flex items-center'>
+          <ThemeToggle />
+        </nav>
+      </div>
+    </div>
+  </header>
+)
+
 export default function Header() {
   return (
     <header className='sticky top-0 z-40 w-full border-b bg-background'>
