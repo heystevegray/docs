@@ -2,7 +2,7 @@
 
 import Avatar from './avatar'
 
-const size = 40
+const defaultSize = 40
 const defaultMax = 5
 
 const initialState = new Array(defaultMax).fill(null).map(() => ({
@@ -13,12 +13,14 @@ const initialState = new Array(defaultMax).fill(null).map(() => ({
 const AvatarGroup = ({
   users = initialState,
   max = defaultMax,
+  size = defaultSize,
 }: {
   users?: {
     src?: string | null
     alt?: string | null
   }[]
   max?: number
+  size?: number
 }) => {
   const totalUsers = users.length
   const remaining = totalUsers - max
