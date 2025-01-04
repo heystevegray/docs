@@ -29,9 +29,11 @@ export const HeaderBasic = () => (
 export default function Header() {
   return (
     <header className='sticky top-0 z-40 w-full border-b bg-background'>
-      <div className='flex h-16 items-center space-x-4 px-3 sm:justify-between sm:space-x-0'>
-        <SidebarTrigger />
-        <MainNav items={siteConfig.mainNav} />
+      <div className='flex h-16 items-center space-x-4 px-3 sm:justify-between'>
+        <div className='flex flex-row items-center gap-2'>
+          <SidebarTrigger />
+          <MainNav items={siteConfig.mainNav} />
+        </div>
         <div className='flex flex-1 items-center justify-end md:space-x-4'>
           <CommandMenu />
           <nav className='flex items-center'>

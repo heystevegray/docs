@@ -1,0 +1,96 @@
+---
+title: Avatar Group
+description: The Avatar Group component shows a group of avatars with a max prop to limit how many are displayed.
+kind: snippet
+---
+
+## Note
+
+This component uses my [Avatar component here](/react/avatar).
+
+## Demo
+
+<AvatarGroup
+  users={[
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+  ]}
+/>
+
+## Demo with max prop
+
+<AvatarGroup
+  users={[
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+    { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+  ]}
+  max={4}
+/>
+
+## Usage
+
+```tsx title="src/app/page.tsx"
+import AvatarGroup from '@/components/avatar-group'
+
+export default function Page() {
+  return (
+    <AvatarGroup
+      users={[
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+        { src: 'https://avatars.githubusercontent.com/u/66500112?v=4', alt: 'Steve' },
+      ]}
+      max={5}
+    />
+  )
+}
+```
+
+## Source Code
+
+```tsx title="src/components/avatar-group.tsx"
+'use client'
+
+import Avatar from './avatar'
+
+const size = 40
+const defaultMax = 5
+
+const initialState = new Array(defaultMax).fill(null).map(() => ({
+  src: null,
+  alt: null,
+}))
+
+const AvatarGroup = ({
+  users = initialState,
+  max = defaultMax,
+}: {
+  users?: {
+    src?: string | null
+    alt?: string | null
+  }[]
+  max?: number
+}) => {
+  const totalUsers = users.length
+  const remaining = totalUsers - max
+  return (
+    <div className='flex flex-row w-full flex-wrap'>
+      {users.slice(0, max).map(({ src, alt }) => (
+        <Avatar key={src} className='-mx-1' src={src} alt={alt} size={size} />
+      ))}
+      {users.length > max ? <Avatar className='-mx-1' src={''} alt={`+${remaining}`} showFullAltText fallbackClassName='text-xs text-foreground' size={size} /> : null}
+    </div>
+  )
+}
+
+export default AvatarGroup
+```

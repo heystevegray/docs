@@ -12,6 +12,10 @@ import Footer from './footer'
 import HeaderText from './header-text'
 import Container from './container'
 import { HeaderBasic } from './header'
+import DropzoneImage from './dropzone-image'
+import Avatar from './avatar'
+import AvatarGroup from './avatar-group'
+import { TailwindIndicator } from './tailwind-indicator'
 
 const linkRightOfHeaderClassName = 'flex flex-row-reverse gap-2 items-center justify-end'
 
@@ -66,6 +70,10 @@ const components = {
   Container,
   CopyButton,
   HeaderBasic,
+  DropzoneImage,
+  Avatar,
+  AvatarGroup,
+  TailwindIndicator,
 }
 
 interface MdxProps {

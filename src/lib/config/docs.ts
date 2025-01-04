@@ -100,6 +100,26 @@ export const config: DocsConfig = {
               title: 'Header',
               items: [],
             },
+            {
+              href: '/react/dropzone-image',
+              title: 'Dropzone Image',
+              items: [],
+            },
+            {
+              href: '/react/avatar',
+              title: 'Avatar',
+              items: [],
+            },
+            {
+              href: '/react/avatar-group',
+              title: 'Avatar Group',
+              items: [],
+            },
+            {
+              href: '/react/tailwind-indicator',
+              title: 'Tailwind Indicator',
+              items: [],
+            },
           ],
         },
         {
