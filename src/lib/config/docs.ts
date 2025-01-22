@@ -12,7 +12,7 @@ export const config: DocsConfig = {
       items: [
         {
           title: 'Framer Components',
-          href: '/fraemr/components',
+          href: '/framer/components',
           items: [
             {
               href: '/framer/components/copyright',
@@ -29,7 +29,7 @@ export const config: DocsConfig = {
         },
         {
           title: 'Framer Overrides',
-          href: '/fraemr/overrides',
+          href: '/framer/overrides',
           items: [
             {
               href: '/framer/overrides/max-width',
