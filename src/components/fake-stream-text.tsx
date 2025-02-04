@@ -9,14 +9,14 @@ interface FakeStreamTextProps {
 }
 
 const FakeStreamText = ({ text, speed = 25, className }: FakeStreamTextProps) => {
-  const [displayedText, setDisplayedText] = useState('')
+  const [displayedText, setDisplayedText] = useState<string[]>([])
 
   useEffect(() => {
     let index = 0
     const intervalId = setInterval(() => {
       const character = text[index]
       if (index < text.length && character) {
-        setDisplayedText((prev) => prev + character)
+        setDisplayedText((prev) => [...prev, text[index]])
         index++
       } else {
         clearInterval(intervalId)
@@ -26,7 +26,15 @@ const FakeStreamText = ({ text, speed = 25, className }: FakeStreamTextProps) =>
     return () => clearInterval(intervalId)
   }, [text, speed])
 
-  return <p className={className}>{displayedText}</p>
+  return (
+    <p className={className}>
+      {displayedText.map((char, i) => (
+        <span key={i} className='fade-in'>
+          {char}
+        </span>
+      ))}
+    </p>
+  )
 }
 
 export default FakeStreamText
