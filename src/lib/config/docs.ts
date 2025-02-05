@@ -120,6 +120,12 @@ export const config: DocsConfig = {
               title: 'Tailwind Indicator',
               items: [],
             },
+            {
+              href: '/react/fake-stream-text',
+              title: 'Fake Stream Text',
+              label: 'New',
+              items: [],
+            },
           ],
         },
         {

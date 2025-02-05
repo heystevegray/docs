@@ -1,0 +1,138 @@
+---
+title: Fake Stream Text
+description: Streaming text like ChatGPT but way cheaper.
+kind: 'snippet'
+---
+
+## Credit
+
+[ChatGPT](https://openai.com/chatgpt/overview/) helped me write this.
+
+## Demo
+
+Dialog from [Dudley Do-Right](https://www.imdb.com/title/tt0160236/?ref_=nv_sr_srsg_0_tt_6_nm_2_in_0_q_dudly%2520do).
+
+### CSS Fade Animation (default)
+
+<FakeTextStream
+  text={`Don't try and confuse me. I know you're a vampire. And I can prove it, too, 'cause only a vampire wouldn't know the answer to this simple, Canadian question. What is Wayne gretzky's middle name? Well, I don't know, Dudley. Well, do you? No. No, I don't. Oh, my god! I am a vampire! You're not a vampire, Dudley.`}
+/>
+
+### Disable Fade Animation
+
+<FakeTextStream
+  disableFade
+  text={`Don't try and confuse me. I know you're a vampire. And I can prove it, too, 'cause only a vampire wouldn't know the answer to this simple, Canadian question. What is Wayne gretzky's middle name? Well, I don't know, Dudley. Well, do you? No. No, I don't. Oh, my god! I am a vampire! You're not a vampire, Dudley.`}
+/>
+
+## Usage
+
+```tsx title="src/app/page.tsx"
+import FakeTextStream from '@/components/fake-text-stream'
+
+export default function Page() {
+  return (
+    <FakeTextStream
+      text={`Don't try and confuse me. I know you're a vampire. And I can prove it, too, 'cause only a vampire wouldn't know the answer to this simple, Canadian question. What is Wayne gretzky's middle name? Well, I don't know, Dudley. Well, do you? No. No, I don't. Oh, my god! I am a vampire! You're not a vampire, Dudley.`}
+    />
+  )
+}
+```
+
+### With No Fade Animation
+
+```tsx title="src/app/page.tsx"
+import FakeTextStream from '@/components/fake-text-stream'
+
+export default function Page() {
+  return (
+    <FakeTextStream
+      disableFade
+      text={`Don't try and confuse me. I know you're a vampire. And I can prove it, too, 'cause only a vampire wouldn't know the answer to this simple, Canadian question. What is Wayne gretzky's middle name? Well, I don't know, Dudley. Well, do you? No. No, I don't. Oh, my god! I am a vampire! You're not a vampire, Dudley.`}
+    />
+  )
+}
+```
+
+## Source Code
+
+```css title="src/app/globals.css"
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+```
+
+```tsx title="src/components/fake-text-stream.tsx"
+'use client'
+
+import { cn } from '@/lib/utils'
+import React, { useState, useEffect } from 'react'
+
+type FakeTextStreamProps = {
+  /**
+   * The text to be displayed.
+   */
+  text: string
+  /**
+   * Speed of the text stream in milliseconds.
+   *
+   * @default 25
+   */
+  speed?: number
+  /**
+   * Disables the fade effect when the text is fully displayed.
+   *
+   * @default false
+   */
+  disableFade?: boolean
+  /**
+   * Additional class names for the component.
+   */
+  className?: string
+}
+
+const FakeTextStream = ({ text, className, disableFade = false, speed = 25 }: FakeTextStreamProps) => {
+  const [displayedText, setDisplayedText] = useState('')
+
+  useEffect(() => {
+    // Reset text when new input is provided
+    setDisplayedText('')
+    let index = 0
+
+    const interval = setInterval(() => {
+      if (index <= text.length) {
+        setDisplayedText(text.slice(0, index))
+        index++
+      } else {
+        clearInterval(interval)
+      }
+    }, speed)
+
+    return () => clearInterval(interval)
+  }, [text, speed])
+
+  return (
+    <p className={className}>
+      {displayedText.split('').map((character, index) => (
+        <span
+          key={index + character}
+          className={cn({
+            'fade-in': !disableFade,
+          })}
+        >
+          {character}
+        </span>
+      ))}
+    </p>
+  )
+}
+
+export default FakeTextStream
+```

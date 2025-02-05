@@ -1,40 +1,65 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import React, { useState, useEffect } from 'react'
 
-interface FakeStreamTextProps {
+type FakeTextStreamProps = {
+  /**
+   * The text to be displayed.
+   */
   text: string
-  speed?: number // Speed in milliseconds
+  /**
+   * Speed of the text stream in milliseconds.
+   *
+   * @default 25
+   */
+  speed?: number
+  /**
+   * Disables the fade effect when the text is fully displayed.
+   *
+   * @default false
+   */
+  disableFade?: boolean
+  /**
+   * Additional class names for the component.
+   */
   className?: string
 }
 
-const FakeStreamText = ({ text, speed = 25, className }: FakeStreamTextProps) => {
-  const [displayedText, setDisplayedText] = useState<string[]>([])
+const FakeTextStream = ({ text, className, disableFade = false, speed = 25 }: FakeTextStreamProps) => {
+  const [displayedText, setDisplayedText] = useState('')
 
   useEffect(() => {
+    // Reset text when new input is provided
+    setDisplayedText('')
     let index = 0
-    const intervalId = setInterval(() => {
-      const character = text[index]
-      if (index < text.length && character) {
-        setDisplayedText((prev) => [...prev, text[index]])
+
+    const interval = setInterval(() => {
+      if (index <= text.length) {
+        setDisplayedText(text.slice(0, index))
         index++
       } else {
-        clearInterval(intervalId)
+        clearInterval(interval)
       }
     }, speed)
 
-    return () => clearInterval(intervalId)
+    return () => clearInterval(interval)
   }, [text, speed])
 
   return (
     <p className={className}>
-      {displayedText.map((char, i) => (
-        <span key={i} className='fade-in'>
-          {char}
+      {displayedText.split('').map((character, index) => (
+        <span
+          key={index + character}
+          className={cn({
+            'fade-in': !disableFade,
+          })}
+        >
+          {character}
         </span>
       ))}
     </p>
   )
 }
 
-export default FakeStreamText
+export default FakeTextStream

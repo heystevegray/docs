@@ -63,8 +63,8 @@ export function CommandMenu({ ...props }: DialogProps) {
                     runCommand(() => router.push(navItem.href as string))
                   }}
                 >
-                  {navItem.label && <Badge>{navItem.label}</Badge>}
                   {navItem.title}
+                  {navItem.label && <Badge>{navItem.label}</Badge>}
                 </CommandItem>
               ))}
             </CommandGroup>
