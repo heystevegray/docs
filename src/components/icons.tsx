@@ -1,13 +1,13 @@
 import { ClassName } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { CloudUpload, Folder, LucideIcon, LucideProps, Moon, SunMedium } from 'lucide-react'
+import { BookOpen, CloudUpload, LucideIcon, LucideProps, Moon, SunMedium } from 'lucide-react'
 
 export type Icon = LucideIcon
 
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
-  logo: ({ className }: ClassName) => <Folder className={cn('size-6', className)} />,
+  logo: ({ className }: ClassName) => <BookOpen className={cn('size-6', className)} />,
   cloudUpload: CloudUpload,
   gitHub: (props: LucideProps) => (
     <svg viewBox='0 0 438.549 438.549' {...props}>
