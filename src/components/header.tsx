@@ -35,7 +35,7 @@ export default function Header() {
           <SidebarTrigger />
           <MainNav items={siteConfig.mainNav} />
         </div>
-        <div className='flex flex-1 items-center justify-end md:space-x-4'>
+        <div className='flex flex-1 items-center justify-end space-x-2'>
           <CommandMenu />
           <nav className='flex items-center'>
             <ShareButton />
