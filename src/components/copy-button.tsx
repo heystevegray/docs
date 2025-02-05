@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { CheckIcon, ClipboardIcon, Link2 } from 'lucide-react'
+import { CheckIcon, ClipboardIcon, Link2, LucideIcon } from 'lucide-react'
 
 import { absoluteUrl, cn } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -11,6 +11,8 @@ import { usePathname, useRouter } from 'next/navigation'
 interface CopyButtonProps extends ButtonProps {
   value: string
   copyButtonVariant?: 'link' | 'code'
+  icon?: LucideIcon
+  description?: string
 }
 
 export async function copyToClipboard(value: string, description?: string) {
@@ -30,9 +32,10 @@ export function CopyButton({ value, className, copyButtonVariant = 'code', child
   const router = useRouter()
   const [hasCopied, setHasCopied] = React.useState(false)
   const isLink = copyButtonVariant === 'link'
-  const [otherIcon] = React.useState(isLink ? <Link2 /> : <ClipboardIcon />)
+  const defaultIcon = props?.icon ? <props.icon /> : <ClipboardIcon />
+  const [otherIcon] = React.useState(isLink ? <Link2 /> : defaultIcon)
   let textValue = value
-  let description = ''
+  let description = props.description
 
   React.useEffect(() => {
     setTimeout(() => {

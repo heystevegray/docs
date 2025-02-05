@@ -8,6 +8,8 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { MainNav } from './main-nav'
 import { SidebarTrigger } from './ui/sidebar'
 import { CommandMenu } from './command-menu'
+import { CopyButton } from './copy-button'
+import ShareButton from './share-button'
 
 export const HeaderBasic = () => (
   <header className='sticky top-0 z-40 w-full border-b bg-background'>
@@ -37,6 +39,7 @@ export default function Header() {
         <div className='flex flex-1 items-center justify-end md:space-x-4'>
           <CommandMenu />
           <nav className='flex items-center'>
+            <ShareButton />
             <Link href={siteConfig.links.github} target='_blank' rel='noreferrer'>
               <div
                 className={cn(
