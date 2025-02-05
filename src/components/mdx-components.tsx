@@ -16,6 +16,7 @@ import DropzoneImage from './dropzone-image'
 import Avatar from './avatar'
 import AvatarGroup from './avatar-group'
 import { TailwindIndicator } from './tailwind-indicator'
+import FakeTextStream from './fake-stream-text'
 
 const linkRightOfHeaderClassName = 'flex flex-row-reverse gap-2 items-center justify-end'
 
@@ -74,6 +75,7 @@ const components = {
   Avatar,
   AvatarGroup,
   TailwindIndicator,
+  FakeTextStream,
 }
 
 interface MdxProps {
