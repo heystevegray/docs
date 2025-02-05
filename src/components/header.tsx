@@ -8,7 +8,6 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { MainNav } from './main-nav'
 import { SidebarTrigger } from './ui/sidebar'
 import { CommandMenu } from './command-menu'
-import { CopyButton } from './copy-button'
 import ShareButton from './share-button'
 
 export const HeaderBasic = () => (
