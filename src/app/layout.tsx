@@ -11,6 +11,7 @@ import { siteConfig } from '@/lib/config/site'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/app-sidebar'
 import { cookies } from 'next/headers'
+import { isDevelopmentEnvironment } from '@/lib/utils'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -44,6 +45,7 @@ export default async function RootLayout({
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true'
   return (
     <html lang='en'>
+      <head>{isDevelopmentEnvironment() ? null : <script defer src='https://analytics.jfay.dev/script.js' data-website-id='f0daad98-e3ac-4196-aaaa-904f2cb38507'></script>}</head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <SidebarProvider defaultOpen={defaultOpen}>
