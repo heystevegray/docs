@@ -12,6 +12,7 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/app-sidebar'
 import { cookies } from 'next/headers'
 import { isDevelopmentEnvironment } from '@/lib/utils'
+import Script from 'next/script'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -60,6 +61,7 @@ export default async function RootLayout({
             <TailwindIndicator />
           </SidebarProvider>
         </ThemeProvider>
+        <Script src='https://umami.stevegray.io/script.js' data-website-id='944a9a9f-0978-4d2f-8200-7c658370c4d4' />
       </body>
     </html>
   )
